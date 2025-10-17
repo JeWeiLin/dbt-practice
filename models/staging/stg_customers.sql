@@ -1,3 +1,4 @@
+
 select
         id as customer_id,
         first_name,
@@ -5,3 +6,4 @@ select
 
 -- from `dbt-tutorial`.jaffle_shop.customers
 from {{ source('jaffle_shop', 'customers') }}
+
