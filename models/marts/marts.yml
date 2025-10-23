@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: dim_ratecode
+    description: "對應 RatecodeID 與其實際費率說明的維度表。"
+    columns:
+      - name: rate_code_id
+        description: "費率代碼 ID"
+        tests:
+          - not_null
+          - unique
+      - name: rate_code_description
+        description: "費率代碼的文字說明"
+
+  - name: dim_payment_type
+    description: "對應 PaymentType 與付款方式文字說明的維度表。"
+    columns:
+      - name: payment_type
+        description: "付款方式代碼"
+        tests:
+          - not_null
+          - unique
+      - name: payment_description
+        description: "付款方式的文字說明"
+
+  - name: fact_trips_summary
+    description: "每日行程彙總事實表，包含營收、距離、小費比例等指標。"
+    columns:
+      - name: trip_date
+        description: "行程日期"
+      - name: vendor_id
+        description: "供應商 ID"
+      - name: total_trips
+        description: "當日總行程數"
+      - name: avg_distance_mi
+        description: "平均車程距離（英里）"
+      - name: avg_total_amount
+        description: "平均總費用（含稅、小費）"
+      - name: total_tips
+        description: "小費總額"

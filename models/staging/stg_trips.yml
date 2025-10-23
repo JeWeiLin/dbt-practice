@@ -1,0 +1,14 @@
+version: 2
+models:
+  - name: stg_trips
+    description: "Cleaned Uber trip records from raw data."
+    columns:
+      - name: vendor_id
+        tests:
+          - not_null    # 測試：不能有 NULL 值
+          - accepted_values:
+              values: [1, 2]   # 測試：允許的值只有 1 或 2
+      - name: total_amount
+        tests:
+          - not_null     # 測試：不能為 NULL
+          - positive     # 測試：必須是正數
