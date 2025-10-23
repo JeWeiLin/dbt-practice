@@ -1,9 +1,9 @@
 version: 2
 
 sources:
-  - name: jaffle_shop
-    database: dbt-tutorial
-    schema: jaffle_shop
+  - name: uber
+    database: tw-rd-data-jewei-lin
+    schema: dbt_analysis
     tables:
-      - name: orders
-      - name: customers
+      - name: uber_dataset
+      
