@@ -1,9 +1,23 @@
+# version: 2
+
+# sources:
+#   - name: uber
+#     database: tw-rd-data-jewei-lin
+#     schema: dbt_analysis
+#     tables:
+#       - name: uber_dataset
+      
 version: 2
 
 sources:
-  - name: uber
-    database: tw-rd-data-jewei-lin
-    schema: dbt_analysis
+  - name: databricks_bronze_layer 
+    database: workspace     # Databricks 的 Catalog
+    schema: bronze          # Databricks 的 Schema
     tables:
-      - name: uber_dataset
-      
+      - name: ubers_raw     # Databricks 的 Table Name (對應 Auto Loader 產生的表)
+        description: "由 Auto Loader 攝取的 Uber 原始資料"
+        # (選用) 加入 freshness 檢查，若資料超過 24 小時沒更新會警告
+        # freshness:
+        #   warn_after: {count: 24, period: hour}
+        #   error_after: {count: 48, period: hour}
+# loaded_at_field: _ingest_time # 假設 Auto Loader 有產生這欄，或是用您的時間欄位’
