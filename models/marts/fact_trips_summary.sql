@@ -7,6 +7,10 @@ SELECT
   t.vendor_id,   --供應商代碼 
   r.rate_code_description, --費率與付款方式說明文字
   p.payment_description,
+--   t.pickup_longitude, 
+--   t.pickup_latitude,
+--   t.dropoff_longitude, 
+--   t.dropoff_latitude,
 
   COUNT(*) AS total_trips,                 -- 行程總數
   AVG(trip_distance) AS avg_distance_mi,   -- 平均行程距離（英里）
@@ -24,4 +28,8 @@ GROUP BY
   trip_date,         
   t.vendor_id,        
   r.rate_code_description,  
-  p.payment_description     
+  p.payment_description
+--   t.pickup_longitude, 
+--   t.pickup_latitude,
+--   t.dropoff_longitude, 
+--   t.dropoff_latitude     

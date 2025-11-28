@@ -33,20 +33,22 @@
 
 
 
-## 1. Unity Catalog：統一的資料治理層
-Unity Catalog 是 Databricks 的統一治理解決方案，本專案利用它解決了傳統 Hive Metastore 權限分散與檔案管理困難的問題。
-三層命名空間 (Three-Level Namespace): 專案中所有的資料存取皆遵循 Catalog.Schema.Table 的標準結構，確保 dbt 與 Auto Loader 能精準定位資料。
-* Catalog (workspace): 最上層的容器，隔離環境邊界。
-* Schema (bronze, silver, gold): 邏輯分層，對應 Medallion 架構的不同階段。
-* Table: 實體資料表 (Managed Tables)。
+## 1. Unity Catalog：資料治理架構
+本專案利用 Unity Catalog 建立標準化的資料存取與管理模式：
 
-Managed Volumes: 在 Bronze 層的攝取階段，使用了 Unity Catalog Volumes (/Volumes/workspace/raw/...) 來管理非結構化的 CSV 檔案與 Checkpoint。
+標準化命名空間: 實作 Catalog.Schema.Table 三層結構。
 
+Catalog: 環境隔離 (Workspace)。
 
+Schema: 對應 Medallion 架構 (Bronze/Silver/Gold)。
 
-## 2. Delta Lake：可靠的儲存格式
-資料在進入 Bronze 層後，即全面轉換為 Delta Lake 格式。這是不僅僅是 Parquet 檔案，更是一層具備 ACID 交易特性的儲存層。
-在本專案中，Delta Lake 發揮了以下關鍵作用：ACID 交易保障 (Reliability): 當 Auto Loader 正在寫入資料 (writeStream) 而 dbt 同時在讀取資料 (dbt run) 時，Delta Lake 確保了讀寫不衝突，讀取者永遠只會讀到已 committed 的完整資料，不會讀到寫到一半的髒資料。
-Schema Evolution (結構演進): 在 Auto Loader 程式碼中設定了 .option("mergeSchema", "true")。
-場景: 當上游 Uber/Taxi 的 CSV 檔案突然新增欄位時，Delta Lake 允許底層資料表結構自動擴充，而不會導致管線崩潰 (Pipeline Failure)。
-效能最佳化: dbt 在 Silver/Gold 層進行轉換時，Delta Lake 的 Metadata 統計資訊 (Min/Max values, Z-Ordering) 能大幅加速 SQL查詢與過濾 (WHERE) 的效能。
+Table: 使用 Managed Tables 管理實體資料。
+
+Managed Volumes: 使用 Volumes (/Volumes/workspace/raw/...) 統一管理原始 CSV 檔案與 Auto Loader Checkpoints。
+
+## 2. Delta Lake：儲存層優勢
+全管線採用 Delta Lake 格式，確保資料管線的強健性與效能：
+
+ACID 交易 (Reliability): 確保 Auto Loader 寫入與 dbt 讀取時的資料一致性，支援並發操作。
+
+Schema Evolution: 透過 .option("mergeSchema", "true") 自動適應上游資料欄位新增，防止 Pipeline 中斷。
