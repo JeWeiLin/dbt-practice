@@ -28,11 +28,11 @@ Managed Volumes: 使用 Volumes (/Volumes/workspace/raw/...) 統一管理原始 
 
 * Multi-hop Architecture：
 
-> Bronze (Raw): 透過 Auto Loader 原始攝取，保留資料原貌 (As-is)，僅追加 Metadata 。
+    * Bronze (Raw): 透過 Auto Loader 原始攝取，保留資料原貌 (As-is)，僅追加 Metadata 。
 
-> Silver (Refined): 進行資料清理、去重 (Deduplication) 與型別轉換。
+    * Silver (Refined): 進行資料清理、去重 (Deduplication) 與型別轉換。
 
-> Gold (Aggregated): 針對特定商業邏輯進行聚合與 Join，產出直接供 BI 報表或 ML 模型使用的商業級資料。
+    * Gold (Aggregated): 針對特定商業邏輯進行聚合與 Join，產出直接供 BI 報表或 ML 模型使用的商業級資料。
 
 
 ### Dataset Discription
