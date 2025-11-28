@@ -22,15 +22,15 @@ Schema Evolution: 透過 .option("mergeSchema", "true") 自動適應上游資料
 ## 3. Structured Streaming 與 Incremental Data Ingestion
 底層採用 Spark Structured Streaming 引擎，將資料流視為無界限的資料表 (Unbounded Table)
 
-增量處理 (Process New Data Only): 系統僅處理自上次執行後新增的資料，而非每次重跑全量資料。這大幅降低了運算成本並縮短了資料延遲 (Latency)。
+增量處理 (Process New Data Only): 系統僅處理自上次執行後新增的資料，而非每次重跑全量資料。這大幅降低了運算成本並縮短了資料延遲。
 
-狀態管理 (Checkpointing): 透過 Checkpoint 機制紀錄 Offset，確保在管線失敗重啟時能從斷點續傳，達成「精確一次 (Exactly-once)」的處理保證，避免資料遺失或重複。
+狀態管理 (Checkpointing): 透過 Checkpoint 機制紀錄 Offset，確保在管線失敗重啟時能從斷點續傳，避免資料遺失或重複。
 
-Multi-hop Architecture (Medallion Architecture)：
+Multi-hop Architecture：
 
-Bronze (Raw): 透過 Auto Loader 原始攝取，保留資料原貌 (As-is)，僅追加 Metadata (如 _rescue_data, input_file_name)。
+Bronze (Raw): 透過 Auto Loader 原始攝取，保留資料原貌 (As-is)，僅追加 Metadata 。
 
-Silver (Refined): 進行資料清理、去重 (Deduplication) 與型別轉換，產生可信任的單一真實來源 (Single Source of Truth)。
+Silver (Refined): 進行資料清理、去重 (Deduplication) 與型別轉換。
 
 Gold (Aggregated): 針對特定商業邏輯進行聚合與 Join，產出直接供 BI 報表或 ML 模型使用的商業級資料。
 
