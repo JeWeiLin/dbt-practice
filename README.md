@@ -3,11 +3,11 @@
 
 * 標準化命名空間: 實作 Catalog.Schema.Table 三層結構。
 
->> Catalog: Workspace。
+> Catalog: Workspace。
 
->> Schema: 對應 Medallion 架構 (Bronze/Silver/Gold)。
+> Schema: 對應 Medallion 架構 (Bronze/Silver/Gold)。
 
->> Table: 使用 Managed Tables 管理實體資料。
+> Table: 使用 Managed Tables 管理實體資料。
 
 Managed Volumes: 使用 Volumes (/Volumes/workspace/raw/...) 統一管理原始 CSV 檔案與 Auto Loader Checkpoints。
 
@@ -28,11 +28,11 @@ Managed Volumes: 使用 Volumes (/Volumes/workspace/raw/...) 統一管理原始 
 
 * Multi-hop Architecture：
 
->> Bronze (Raw): 透過 Auto Loader 原始攝取，保留資料原貌 (As-is)，僅追加 Metadata 。
+> Bronze (Raw): 透過 Auto Loader 原始攝取，保留資料原貌 (As-is)，僅追加 Metadata 。
 
->> Silver (Refined): 進行資料清理、去重 (Deduplication) 與型別轉換。
+> Silver (Refined): 進行資料清理、去重 (Deduplication) 與型別轉換。
 
->> Gold (Aggregated): 針對特定商業邏輯進行聚合與 Join，產出直接供 BI 報表或 ML 模型使用的商業級資料。
+> Gold (Aggregated): 針對特定商業邏輯進行聚合與 Join，產出直接供 BI 報表或 ML 模型使用的商業級資料。
 
 
 ### Dataset Discription
