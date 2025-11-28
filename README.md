@@ -3,11 +3,11 @@
 
 * 標準化命名空間: 實作 Catalog.Schema.Table 三層結構。
 
-> Catalog: Workspace。
+    * Catalog: Workspace。
 
-> Schema: 對應 Medallion 架構 (Bronze/Silver/Gold)。
+    * Schema: 對應 Medallion 架構 (Bronze/Silver/Gold)。
 
-> Table: 使用 Managed Tables 管理實體資料。
+    * Table: 使用 Managed Tables 管理實體資料。
 
 Managed Volumes: 使用 Volumes (/Volumes/workspace/raw/...) 統一管理原始 CSV 檔案與 Auto Loader Checkpoints。
 
