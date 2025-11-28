@@ -1,7 +1,7 @@
 ## 1. Unity Catalog 
 本專案利用 Unity Catalog 建立標準化的資料存取與管理模式：
 
-標準化命名空間: 實作 Catalog.Schema.Table 三層結構。
+* 標準化命名空間: 實作 Catalog.Schema.Table 三層結構。
 
 Catalog: Workspace。
 
@@ -12,21 +12,21 @@ Table: 使用 Managed Tables 管理實體資料。
 Managed Volumes: 使用 Volumes (/Volumes/workspace/raw/...) 統一管理原始 CSV 檔案與 Auto Loader Checkpoints。
 
 ## 2. Delta Lake
-採用 Delta Lake 格式，確保資料管線的強健性與效能：
+* 採用 Delta Lake 格式，確保資料管線的強健性與效能：
 
-ACID 交易 (Reliability): 確保 Auto Loader 寫入與 dbt 讀取時的資料一致性，支援並發操作。
+* ACID 交易 (Reliability): 確保 Auto Loader 寫入與 dbt 讀取時的資料一致性，支援並發操作。
 
-Schema Evolution: 透過 .option("mergeSchema", "true") 自動適應上游資料欄位新增，防止 Pipeline 中斷。
+* Schema Evolution: 透過 .option("mergeSchema", "true") 自動適應上游資料欄位新增，防止 Pipeline 中斷。
 
 
 ## 3. Structured Streaming 與 Incremental Data Ingestion
-底層採用 Spark Structured Streaming 引擎，將資料流視為無界限的資料表 (Unbounded Table)
+* 底層採用 Spark Structured Streaming 引擎，將資料流視為無界限的資料表 (Unbounded Table)
 
-增量處理 (Process New Data Only): 系統僅處理自上次執行後新增的資料，而非每次重跑全量資料。這大幅降低了運算成本並縮短了資料延遲。
+* 增量處理 (Process New Data Only): 系統僅處理自上次執行後新增的資料，而非每次重跑全量資料。這大幅降低了運算成本並縮短了資料延遲。
 
-狀態管理 (Checkpointing): 透過 Checkpoint 機制紀錄 Offset，確保在管線失敗重啟時能從斷點續傳，避免資料遺失或重複。
+* 狀態管理 (Checkpointing): 透過 Checkpoint 機制紀錄 Offset，確保在管線失敗重啟時能從斷點續傳，避免資料遺失或重複。
 
-Multi-hop Architecture：
+* Multi-hop Architecture：
 
 Bronze (Raw): 透過 Auto Loader 原始攝取，保留資料原貌 (As-is)，僅追加 Metadata 。
 
