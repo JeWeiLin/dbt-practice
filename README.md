@@ -50,4 +50,6 @@ Managed Volumes: 在 Bronze 層的攝取階段，使用了 Unity Catalog Volumes
 * ACID 交易保障 (Reliability): 當 Auto Loader 正在寫入資料 (writeStream) 而 dbt 同時在讀取資料 (dbt run) 時，Delta Lake 確保了讀寫不衝突，讀取者永遠只會讀到已 committed 的完整資料，不會讀到寫到一半的髒資料。
 
 * Schema Evolution (結構演進): 在 Auto Loader 程式碼中設定了 .option("mergeSchema", "true")。
-當上游 Uber/Taxi 的 CSV 檔案突然新增欄位時，Delta Lake 允許底層資料表結構自動擴充，而不會導致管線崩潰 (Pipeline Failure)。效能最佳化: dbt 在 Silver/Gold 層進行轉換時，Delta Lake 的 Metadata 統計資訊 (Min/Max values, Z-Ordering) 能大幅加速 SQL查詢與過濾 (WHERE) 的效能。
+當上游 Uber/Taxi 的 CSV 檔案突然新增欄位時，Delta Lake 允許底層資料表結構自動擴充，而不會導致管線崩潰 (Pipeline Failure)。
+
+* 效能最佳化: dbt 在 Silver/Gold 層進行轉換時，Delta Lake 的 Metadata 統計資訊 (Min/Max values, Z-Ordering) 能大幅加速 SQL查詢與過濾 (WHERE) 的效能。
