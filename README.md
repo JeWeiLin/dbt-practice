@@ -55,14 +55,14 @@ Managed Volumes: 在 Bronze 層的攝取階段，使用了 Unity Catalog Volumes
 * 效能最佳化: dbt 在 Silver/Gold 層進行轉換時，Delta Lake 的 Metadata 統計資訊 (Min/Max values, Z-Ordering) 能大幅加速 SQL查詢與過濾 (WHERE) 的效能。
 
 
-### Payment Method Analysis: Revenue vs. Trip Volume
+* ### Payment Method Analysis: Revenue vs. Trip Volume
 ![Payment Method Analysis: Revenue vs. Trip Volume](visualization-3.png)
 
-### Operational Insights: Revenue by Rate Code & Distance
+* ### Operational Insights: Revenue by Rate Code & Distance
 ![Operational Insights: Revenue by Rate Code & Distance](visualization-4.png)
 
-### Payment Method Performance: Revenue vs. Trip Volume
+* ### Payment Method Performance: Revenue vs. Trip Volume
 ![Payment Method Performance: Revenue vs. Trip Volume](visualization-5.png) 
 
-### Operational Deep Dive: Revenue by Rate Code & Distance Correlation
+* ### Operational Deep Dive: Revenue by Rate Code & Distance Correlation
 ![Operational Deep Dive: Revenue by Rate Code & Distance Correlation](visualization-6.png)
