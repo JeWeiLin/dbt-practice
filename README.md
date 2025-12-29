@@ -62,7 +62,7 @@ Managed Volumes: 在 Bronze 層的攝取階段，使用了 Unity Catalog Volumes
 ![Operational Insights: Revenue by Rate Code & Distance](visualization-4.png)
 
 * Payment Method Performance: Revenue vs. Trip Volume
-![Payment Method Performance: Revenue vs. Trip Volume](visualization-5.png =600x600) 
+![Payment Method Performance: Revenue vs. Trip Volume](visualization-5.png) 
 
 * Operational Deep Dive: Revenue by Rate Code & Distance Correlation
 ![Operational Deep Dive: Revenue by Rate Code & Distance Correlation](visualization-6.png)
